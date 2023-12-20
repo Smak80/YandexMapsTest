@@ -1,5 +1,6 @@
 package ru.smak.mapstest
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +19,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.ViewModelProvider
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
+import com.yandex.mapkit.geometry.Polyline
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 import ru.smak.mapstest.ui.theme.MapsTestTheme
@@ -88,6 +90,21 @@ fun YaMap(
                         30.0f
                     )
                 )
+                val points = listOf(
+                    Point(55.7921, 49.1222),
+                    Point(55.79222, 49.1225),
+                    Point(55.79221, 49.1228),
+                    Point(55.79, 49.122),
+                )
+                val polyline = Polyline(points)
+
+                val polylineObject = mapWindow.map.mapObjects.addPolyline(polyline)
+                polylineObject.apply {
+                    strokeWidth = 5f
+                    setStrokeColor(Color.GREEN)
+                    outlineWidth = 1f
+                    outlineColor = Color.MAGENTA
+                }
             }
         })
     }
